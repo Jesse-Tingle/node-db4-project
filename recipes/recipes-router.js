@@ -33,4 +33,20 @@ router.get("/:id/shoppingList", (req, res) => {
 		});
 });
 
+router.get("/:id/instructions", (req, res) => {
+	const { id } = req.params;
+
+	Ingredients.getInstructions(id)
+		.then(steps => {
+			if (steps) {
+				res.json(steps);
+			} else {
+				res.json(404).json({ message: "Failed to get instructions." });
+			}
+		})
+		.catch(err => {
+			err, res.status(500).json({ message: "Failed to get instructions." });
+		});
+});
+
 module.exports = router;

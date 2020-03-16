@@ -11,6 +11,14 @@ function getShoppingList(recipes_id) {
 		);
 }
 
+function getInstructions(recipes_id) {
+	return db("instructions")
+		.where("recipes_id", recipes_id)
+		.select("step_number", "name", "description")
+		.orderBy("step_number");
+}
+
 module.exports = {
-	getShoppingList
+	getShoppingList,
+	getInstructions
 };
